@@ -14,12 +14,15 @@ search.addEventListener('click', async () => {
   let returns = await axios.get(
     `https://api.themoviedb.org/3/search/movie?query=${movie}&api_key=${API_KEY}`
   )
-  //push the input values into newArr here??
-  const renderList = (newArr) => {
-    for (let i = 0; i < movie.data.returns.length; i++) {
-      let title = document.createElement('li')
-      title.innerHTML = newArr[i]
-      ul.appendChild(title)
-    }
-  }
+  let movies = returns.data.results
+  console.log(returns)
+  renderList(movies)
 })
+
+const renderList = (newArr) => {
+  for (let i = 0; i < newArr.length; i++) {
+    let title = document.createElement('li')
+    title.innerHTML = newArr[i].title
+    ul.appendChild(title)
+  }
+}
